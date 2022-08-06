@@ -5,16 +5,142 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dropdown1</title>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+
+      body {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        background-color: #d1d1d1;
+      }
+
+      .wrapper {
+        width: 400px;
+        height: 60px;
+        margin-top: 200px;
+        user-select: none;
+        filter: drop-shadow(0 0 4px #0007);
+
+        overflow: hidden;
+      }
+
+      .title {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        border: 1px solid #999;
+        background-color: #fff;
+        color: #333;
+        font-size: 25px;
+        font-family: monospace;
+      }
+
+      .icon {
+        cursor: pointer;
+        padding: 12px 30px 12px 15px;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .dropdown {
+        width: 100%;
+        height: auto;
+        padding-top: 7px;
+        border-radius: 10px;
+        position: relative;
+        border: 1px solid #aaa;
+        background-color: #fff;
+        margin-top: 25px;
+        list-style: none;
+        isolation: isolate;
+
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+
+      .dropdown::after {
+        content: "";
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        border-top: inherit;
+        background-color: inherit;
+        top: 0;
+        right: 30px;
+        z-index: -1;
+        transform: translateY(-50%) rotate(45deg);
+      }
+
+      .dropdown li {
+        color: #555;
+        font-size: 20px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .dropdown li:hover {
+        background-color: #e7e7e7;
+      }
+      .dropdown li:last-child {
+        border: none;
+        border-bottom-right-radius: inherit;
+        border-bottom-left-radius: inherit;
+      }
+
+      .icon::after {
+        content: "";
+        width: 27px;
+        height: 27px;
+        filter: opacity(0.8);
+        background-color: #ccc;
+        background-image: var(--src);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+
+      .active {
+        overflow: visible;
+      }
+      .active .dropdown {
+        opacity: 1;
+      }
+    </style>
   </head>
   <body>
     <div class="wrapper">
-      <h4 class="title icon">Offered Languages</h4>
+      <h4 class="title icon" style="--src: url(./image/down.png)">
+        Offered Languages
+      </h4>
       <ul class="dropdown">
-        <li class="icon">Javascript</li>
-        <li class="icon">Python</li>
-        <li class="icon">Go</li>
-        <li class="icon">C</li>
+        <li class="icon" style="--src: url(./image/js.png)">Javascript</li>
+        <li class="icon" style="--src: url(./image/py.png)">Python</li>
+        <li class="icon" style="--src: url(./image/cpp.png)">C++</li>
+        <li class="icon" style="--src: url(./image/go.png)">Go</li>
+        <li class="icon" style="--src: url(./image/c.png)">C</li>
       </ul>
     </div>
+
+    <script type="text/javascript">
+      const wrapper = document.querySelector(".wrapper");
+      wrapper.addEventListener("click", (ev) => {
+        let el = ev.target.parentElement;
+        if (el == wrapper || el.parentElement == wrapper) {
+          wrapper.classList.toggle("active");
+        }
+      });
+    </script>
   </body>
 </html>
